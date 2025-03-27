@@ -78,6 +78,19 @@ This is the place for you to write reflections:
 
 #### Reflection Publisher-1
 
+1. Is a trait still necessary in BambangShop, or is a single Model struct enough?
+
+In typical Observer pattern implementations, a trait (or interface) defines a shared behavior for all subscribers—like an update() method. But in BambangShop's case, where all subscribers are external Rocket instances receiving notifications through HTTP POST requests, this shared behavior isn’t implemented in code. Instead, the system just sends out requests. So, there's no need for a trait or interface—one simple Subscriber struct holding the necessary data (like url and name) is sufficient.
+
+2. Is using a Vec enough, or should we use DashMap to ensure uniqueness of IDs and URLs?
+
+Using DashMap is the better approach here. While a Vec can store elements, you'd need to manually scan through it to avoid duplicates—this gets inefficient as the list grows. DashMap, on the other hand, allows fast, key-based access and inherently enforces uniqueness for IDs and URLs. Plus, it’s thread-safe, which is important in a multi-threaded web environment where multiple operations might happen at once.
+
+3. Can we use the Singleton pattern instead of DashMap?
+
+The Singleton pattern ensures that only one instance of something—like a global SUBSCRIBERS list—exists. However, it doesn't automatically handle concurrent access. DashMap not only works well as a Singleton (using something like lazy_static!) but also provides built-in thread safety. This makes DashMap a better fit because it supports safe concurrent read/write access without needing extra locking logic.
+
+
 #### Reflection Publisher-2
 
 #### Reflection Publisher-3
