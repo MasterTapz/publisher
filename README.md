@@ -93,4 +93,36 @@ The Singleton pattern ensures that only one instance of something—like a globa
 
 #### Reflection Publisher-2
 
+1. Why should we separate “Service” and “Repository” from a Model in the MVC pattern?
+
+Separating Service and Repository from the Model follows the Single Responsibility Principle (SRP), which means each component should only handle one specific task. 
+
+- The Repository handles all data-related operations, such as saving, retrieving, or updating records. It abstracts away the database layer. 
+- The Service layer deals with the core business logic, keeping it independent from how data is stored or retrieved.
+
+This separation improves modularity and makes the code easier to test and maintain. Changes to how data is stored or how business logic works won’t directly affect the Model, helping avoid bugs and making the system more flexible.
+
+2. What if we only use the Model?
+
+Relying only on the Model for everything leads to tightly coupled and harder-to-manage code.
+
+- Complexity: Models would need to handle data access, validation, and business rules, making them overly complex. 
+- Repetition: Shared logic like validation or notifications might get duplicated across multiple models, which can cause inconsistencies. 
+- Poor Scalability: Models interacting directly makes it harder to refactor or test, and the code becomes more rigid.
+
+This setup goes against SRP and hurts scalability and maintainability.
+
+3. How does Postman help with testing?
+
+Postman is a great tool for testing REST APIs by allowing you to send simulated HTTP requests and check the responses, even without a frontend.
+
+Helpful features include:
+- Collections: Lets you organize and test multiple endpoints neatly.
+- Environment Variables: Makes switching between dev and production easy.
+- Automated Testing: You can write scripts to ensure endpoints still work after changes.
+- Mock Servers: Helps simulate backend responses for testing purposes.
+
+These features make Postman a powerful tool for debugging and validating APIs during both solo and group development work.
+
+
 #### Reflection Publisher-3
