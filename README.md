@@ -126,3 +126,33 @@ These features make Postman a powerful tool for debugging and validating APIs du
 
 
 #### Reflection Publisher-3
+
+
+1. Which variation of the Observer Pattern is used in this tutorial?
+
+This tutorial uses the Push model of the Observer Pattern. In this setup, the publisher (BambangShop) sends out notifications directly to each subscriber by making HTTP POST requests that include relevant data like product status or details.
+
+2. What are the pros and cons of using the Pull model instead?
+
+In the Pull model, subscribers would request updates from the publisher instead of receiving them automatically.
+
+Advantages:
+- Subscribers can choose when to get data, which helps avoid unnecessary updates.
+- It can reduce the load on the publisher since it doesn’t have to notify everyone.
+
+Disadvantages:
+- Subscribers must handle their own polling logic, adding complexity.
+- Updates won’t be instant unless the polling happens very frequently, which increases latency.
+- Not suitable for real-time updates, as important changes might be missed between polls.
+
+In this tutorial’s case, the Pull model would not be ideal since the goal is to notify subscribers immediately when updates happen.
+
+3. What happens if we skip multi-threading in the notification process?
+
+Without multi-threading:
+- Performance takes a hit because notifications are sent one at a time. If any subscriber’s request is slow, it delays the rest.
+- The main thread gets blocked during this process, which can interfere with handling other tasks like new requests.
+- Scalability becomes a problem—more subscribers means more delay, as each one is handled sequentially.
+
+Using multi-threading allows notifications to be sent out in parallel, boosting speed and keeping the application responsive even with many subscribers.
+
